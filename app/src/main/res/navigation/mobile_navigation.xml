@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/actorsFragment">
+
+    <fragment
+        android:id="@+id/actorsFragment"
+        android:name="com.example.actorsapp.UI.Actors.ActorsFragment"
+        android:label="fragment_actors"
+        tools:layout="@layout/fragment_actors" >
+
+        <action
+            android:id="@+id/next_fra"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_actorsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.actorsapp.UI.Details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="actorId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="favorite"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_detailsFragment_to_actorsFragment"
+            app:destination="@id/actorsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.actorsapp.UI.Favorites.FavoritesFragment"
+        android:label="favorites_fragment"
+        tools:layout="@layout/favorites_fragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+</navigation>
