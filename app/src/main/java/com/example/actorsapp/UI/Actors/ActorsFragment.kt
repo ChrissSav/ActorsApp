@@ -17,8 +17,6 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.core.os.bundleOf
-import com.example.actorsapp.ApplicationClass
-import com.example.actorsapp.Data.DAO.ActorDAO
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

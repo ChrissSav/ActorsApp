@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.actorsapp.di.*
 import org.koin.core.context.startKoin
 
-class ApplicationClass : Application() {
+class ActorsApp : Application() {
 
 
     override fun onCreate() {
@@ -12,8 +12,9 @@ class ApplicationClass : Application() {
 
 
         startKoin {
+
             modules(
-                myModules,
+               // myModules,
                 storageModule,
                 viewModelModuleFav,
                 viewModelModuleActor,
@@ -21,4 +22,6 @@ class ApplicationClass : Application() {
             )
         }
     }
+
+
 }

@@ -10,12 +10,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.actorsapp.API.Models.ActorDetails
-import com.example.actorsapp.ApplicationClass
-import com.example.actorsapp.Data.ActorsDataBase
-import com.example.actorsapp.Data.Entities.RoomActor
 import com.example.actorsapp.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

@@ -19,7 +19,6 @@ val viewModelModuleActor = module {
     }
 }
 
-//ok
 val viewModelModuleDetails = module {
     viewModel {
         DetailsViewModel(get())
