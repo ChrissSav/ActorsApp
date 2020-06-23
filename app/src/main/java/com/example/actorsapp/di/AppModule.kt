@@ -8,13 +8,8 @@ import com.example.actorsapp.Data.ActorsDataBase
 import org.koin.dsl.module
 
 
-val myModules = module {
 
-    single { ClientAPI() }
-
-
-}
-val testModule = module {
+val clientModule = module {
     single { provideEndpoints() }
 }
 
