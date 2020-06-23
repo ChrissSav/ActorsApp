@@ -15,12 +15,12 @@ val viewModelModuleFav = module {
 
 val viewModelModuleActor = module {
     viewModel {
-        ActorsViewModel(get())
+        ActorsViewModel(get(), get())
     }
 }
 
 val viewModelModuleDetails = module {
     viewModel {
-        DetailsViewModel(get())
+        DetailsViewModel(get(), get())
     }
 }

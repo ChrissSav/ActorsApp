@@ -7,14 +7,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-//val clientApiModule = module {
-//
-//    // Define a singleton for type  DataRepository
-//    single { ClientAPI() }
-//
-//    // Mock
-//}
-
 
 
 class ClientAPI {

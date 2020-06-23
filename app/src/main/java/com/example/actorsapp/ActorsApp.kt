@@ -16,6 +16,7 @@ class ActorsApp : Application() {
             androidContext(this@ActorsApp)
             modules(
                 myModules,
+                testModule,
                 storageModule,
                 viewModelModuleFav,
                 viewModelModuleActor,

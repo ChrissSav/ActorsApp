@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.actorsapp.API.ClientAPI
 import com.example.actorsapp.API.Models.ActorModel
 import com.example.actorsapp.API.MoviesEndpoints
 import com.example.actorsapp.Data.ActorsDataBase
 import com.example.actorsapp.Data.Entities.RoomActor
 import kotlinx.coroutines.launch
 
-class ActorsViewModel (private val db: ActorsDataBase): ViewModel() {
+class ActorsViewModel (private val db: ActorsDataBase, private val endpoints: MoviesEndpoints): ViewModel() {
 
 
     private val _actorsList = MutableLiveData<ArrayList<Pair<ActorModel, Boolean>>>()
@@ -23,14 +22,15 @@ class ActorsViewModel (private val db: ActorsDataBase): ViewModel() {
     fun getActorsFromApi(page: Int) {
        // Log.i("estila", "page: $page")
         viewModelScope.launch {
+
             var final: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
 
 
             dataList = db.currentActorDao().getActors()
 
-            val request = ClientAPI.createService(MoviesEndpoints::class.java)
+           // val request = ClientAPI.createService(MoviesEndpoints::class.java)
 
-            val res = request.getActorsTest(page = page)
+            val res = endpoints.getActorsTest(page = page)
             if (res.isSuccessful) {
 
                 val apiList = res.body()?.results
@@ -48,9 +48,6 @@ class ActorsViewModel (private val db: ActorsDataBase): ViewModel() {
 
                 }
                 // _actorsList.value = res.body()?.results
-
-            } else {
-
 
             }
         }

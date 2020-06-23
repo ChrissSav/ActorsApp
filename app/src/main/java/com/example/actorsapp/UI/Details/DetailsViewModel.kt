@@ -13,7 +13,7 @@ import com.example.actorsapp.Data.DAO.ActorDAO
 import com.example.actorsapp.Data.Entities.RoomActor
 import kotlinx.coroutines.launch
 
-class DetailsViewModel(private val db: ActorsDataBase) : ViewModel() {
+class DetailsViewModel(private val db: ActorsDataBase,private val endpoints: MoviesEndpoints) : ViewModel() {
 
     private val _actor = MutableLiveData<ActorDetails>()
     val actor: LiveData<ActorDetails> = _actor
@@ -27,9 +27,9 @@ class DetailsViewModel(private val db: ActorsDataBase) : ViewModel() {
 
     fun getPostFromAPiTest(id: Int) {
         viewModelScope.launch {
-            val request = ClientAPI.createService(MoviesEndpoints::class.java)
+            //val request = ClientAPI.createService(MoviesEndpoints::class.java)
 
-            val res = request.getActorByIdTest(id = id)
+            val res = endpoints.getActorByIdTest(id = id)
             if (res.isSuccessful) {
                 _actor.value = res.body()
             } else {
