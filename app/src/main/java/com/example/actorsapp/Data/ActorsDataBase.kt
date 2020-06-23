@@ -19,6 +19,9 @@ abstract class ActorsDataBase : RoomDatabase() {
 
 
     companion object {
+        private const val DB_NAME = "movies.db"
+
+
         @Volatile
         private var INSTANCE: ActorsDataBase? = null
 
@@ -32,9 +35,9 @@ abstract class ActorsDataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ActorsDataBase::class.java,
-                    "movies.db"
+                    DB_NAME
+
                 )
-                    //.addMigrations(*DatabaseMigrations.MIGRATIONS)
                     .build()
 
                 INSTANCE = instance
