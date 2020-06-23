@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.actorsapp.API.Models.ActorDetails
 import com.example.actorsapp.ApplicationClass
+import com.example.actorsapp.Data.ActorsDataBase
 import com.example.actorsapp.Data.Entities.RoomActor
 import com.example.actorsapp.R
 import com.squareup.picasso.Callback
@@ -21,11 +22,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class DetailsFragment : Fragment() {
+class DetailsFragment() : Fragment() {
 
-    private lateinit var detailsViewModel: DetailsViewModel
+    private val detailsViewModel: DetailsViewModel by viewModel()
     private lateinit var buttonAddToFavorites: ImageButton
     private lateinit var actorDetails: ActorDetails
     private lateinit var views: View
@@ -38,7 +40,7 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        detailsViewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
+        //detailsViewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_details, container, false)
 
@@ -68,6 +70,11 @@ class DetailsFragment : Fragment() {
             val navController = Navigation.findNavController(views)
             navController!!.navigate(R.id.action_detailsFragment_to_actorsFragment)
 
+        })
+
+        detailsViewModel.register.observe(viewLifecycleOwner, Observer {
+            val navController = Navigation.findNavController(views)
+            navController!!.navigate(R.id.action_detailsFragment_to_actorsFragment)
         })
 
         detailsViewModel.actor.observe(viewLifecycleOwner, Observer {
@@ -105,10 +112,11 @@ class DetailsFragment : Fragment() {
 
             CoroutineScope(IO).launch {
                 if (fav) {
-                    val v = view.context.applicationContext as ApplicationClass
-                    detailsViewModel.deleteActorFromFav(v.db.currentActorDao(), actorDetails)
+
+                    detailsViewModel.deleteActorFromFav(actorDetails)
                 } else {
-                    registerActor(view, actorDetails)
+
+                    detailsViewModel.registerActorToFav(actorDetails)
                 }
             }
 
@@ -117,7 +125,7 @@ class DetailsFragment : Fragment() {
         detailsViewModel.getPostFromAPiTest(actorId)
     }
 
-    private suspend fun registerActor(context: View, actorDetails: ActorDetails) {
+    /*private suspend fun registerActor(context: View, actorDetails: ActorDetails) {
         val repo = context.context.applicationContext as ApplicationClass
         val actor = RoomActor(
             actorDetails.id,
@@ -128,6 +136,6 @@ class DetailsFragment : Fragment() {
         Log.i("takis", repo.db.currentActorDao().insertOrUpdateActor(actor).toString())
         val navController = Navigation.findNavController(views)
         navController!!.navigate(R.id.action_detailsFragment_to_actorsFragment)
-    }
+    }*/
 
 }

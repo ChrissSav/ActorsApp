@@ -17,22 +17,21 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProviders
 import com.example.actorsapp.ApplicationClass
 import com.example.actorsapp.Data.DAO.ActorDAO
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ActorsFragment : Fragment() {
 
     private var navController: NavController? = null
-    private lateinit var actorsViewModel: ActorsViewModel
+    private val actorsViewModel: ActorsViewModel by viewModel()
     private lateinit var recyclerView: RecyclerView
     private var exampleListTests: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
 
     private var page: Int = 1
     private lateinit var progressBar: ProgressBar
     private lateinit var buttonFav: Button
-    private lateinit var dataBase: ActorDAO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +39,7 @@ class ActorsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        actorsViewModel = ViewModelProviders.of(this).get(ActorsViewModel::class.java)
+        //actorsViewModel = ViewModelProviders.of(this).get(ActorsViewModel::class.java)
         //exampleListTests.clear()
         //page = 1
         return inflater.inflate(R.layout.fragment_actors, container, false)
@@ -51,24 +50,25 @@ class ActorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val v = view.context.applicationContext as ApplicationClass
-        dataBase = v.db.currentActorDao()
+        //val v = view.context.applicationContext as ApplicationClass
         navController = Navigation.findNavController(view)
         recyclerView = view.findViewById(R.id.recycler_view)
         progressBar = view.findViewById(R.id.progressBar)
         buttonFav = view.findViewById(R.id.button_ActorsFragment)
         createRecycleView()
 
-        actorsViewModel.postList.observe(viewLifecycleOwner, Observer {
+        actorsViewModel.actorsList.observe(viewLifecycleOwner, Observer {
+
             exampleListTests.addAll(it)
             progressBar.visibility = View.GONE
             recyclerView.adapter?.notifyDataSetChanged()
+
             //createRecycleView()
         })
 
         if (exampleListTests.size < 1){
-            Log.i("estila","1")
-            actorsViewModel.getActorsFromApi(page, dataBase)
+           // Log.i("estila","1")
+            actorsViewModel.getActorsFromApi(page)
         }
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -81,7 +81,7 @@ class ActorsFragment : Fragment() {
                     page++
                     Log.i("estila","2")
 
-                    actorsViewModel.getActorsFromApi(page, dataBase)
+                    actorsViewModel.getActorsFromApi(page)
 
                 }
             }

@@ -8,11 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.actorsapp.API.ClientAPI
 import com.example.actorsapp.API.Models.ActorDetails
 import com.example.actorsapp.API.MoviesEndpoints
+import com.example.actorsapp.Data.ActorsDataBase
 import com.example.actorsapp.Data.DAO.ActorDAO
 import com.example.actorsapp.Data.Entities.RoomActor
 import kotlinx.coroutines.launch
 
-class DetailsViewModel : ViewModel() {
+class DetailsViewModel(private val db: ActorsDataBase) : ViewModel() {
 
     private val _actor = MutableLiveData<ActorDetails>()
     val actor: LiveData<ActorDetails> = _actor
@@ -20,6 +21,9 @@ class DetailsViewModel : ViewModel() {
     private val _flag = MutableLiveData<Boolean>()
     val flag: LiveData<Boolean> = _flag
 
+
+    private val _register = MutableLiveData<Boolean>()
+    val register: LiveData<Boolean> = _register
 
     fun getPostFromAPiTest(id: Int) {
         viewModelScope.launch {
@@ -35,21 +39,29 @@ class DetailsViewModel : ViewModel() {
         }
     }
 
-    fun deleteActorFromFav(currentActorDao: ActorDAO, actor: ActorDetails) {
+    fun deleteActorFromFav(actor: ActorDetails) {
         viewModelScope.launch {
-            currentActorDao.deleteActor(
-                RoomActor(
-                    actor.id, actor.name, actor.profilePath
-                    , actor.popularity
-                )
-            )
-            currentActorDao.deleteActor(
+            db.currentActorDao().deleteActor(
                 RoomActor(
                     actor.id, actor.name, actor.profilePath
                     , actor.popularity
                 )
             )
             _flag.value = true
+
+        }
+    }
+
+    fun registerActorToFav(actor: ActorDetails) {
+        viewModelScope.launch {
+            db.currentActorDao().insertOrUpdateActor(
+                RoomActor(
+                    actor.id, actor.name, actor.profilePath
+                    , actor.popularity
+                )
+            )
+
+            _register.value = true
 
         }
     }

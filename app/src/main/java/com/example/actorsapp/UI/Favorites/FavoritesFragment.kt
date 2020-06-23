@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.actorsapp.ApplicationClass
 import com.example.actorsapp.Data.Entities.RoomActor
 import com.example.actorsapp.R
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class FavoritesFragment : Fragment() {
 
+    private  val viewModel:FavoritesViewModel by viewModel()
 
-    private lateinit var viewModel: FavoritesViewModel
+    //private lateinit var viewModel: FavoritesViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var views: View
     private var actorsList: List<RoomActor> = ArrayList()
@@ -34,7 +37,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         views = view
-        viewModel = ViewModelProviders.of(this).get(FavoritesViewModel::class.java)
+//        viewModel = ViewModelProviders.of(this).get(FavoritesViewModel::class.java)
         recyclerView = view.findViewById(R.id.recycler_view_FavoritesFragment)
         viewModel.actorList.observe(viewLifecycleOwner, Observer {
             actorsList = it
@@ -42,10 +45,10 @@ class FavoritesFragment : Fragment() {
             createRecycleView()
         })
 
-        val repo = view.context.applicationContext as ApplicationClass
+        ///val repo = view.context.applicationContext as ApplicationClass
         //val nextAction = FavoritesFragmentDirections.nextAction()
 
-        viewModel.getPostFromDataBase(repo.db)
+        viewModel.getPostFromDataBase()
     }
 
 

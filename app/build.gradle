@@ -52,7 +52,7 @@ dependencies {
 
     //APi
 
-    implementation "com.squareup.retrofit2:retrofit:2.6.2"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.6.2"
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
@@ -93,6 +93,17 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
+
+    def koin_version = "2.1.6"
+
+    //Koin
+    //implementation "org.koin:koin-core:$koin_version"
+   // implementation "org.koin:koin-core-ext:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-android:$koin_version"
+
+   // testImplementation "org.koin:koin-test:$koin_version"
 
 
 

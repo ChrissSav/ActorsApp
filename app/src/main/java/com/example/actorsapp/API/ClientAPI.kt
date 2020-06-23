@@ -1,8 +1,21 @@
 package com.example.actorsapp.API
 
+import com.example.actorsapp.Data.ActorsDataBase
 import okhttp3.OkHttpClient
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+
+//val clientApiModule = module {
+//
+//    // Define a singleton for type  DataRepository
+//    single { ClientAPI() }
+//
+//    // Mock
+//}
+
+
 
 class ClientAPI {
     companion object {
