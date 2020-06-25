@@ -6,7 +6,7 @@ import com.example.actorsapp.API.Models.ActorModel
 
 interface ApiRepository {
     suspend fun getActors(page: Int): ArrayList<ActorModel>
-    suspend fun getActorById(page: Int): ActorDetailsModel?
+    suspend fun getActorById(id: Int): ActorDetailsModel?
 }
 
 

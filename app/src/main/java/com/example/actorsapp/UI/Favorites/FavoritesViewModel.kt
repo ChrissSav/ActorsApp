@@ -13,13 +13,11 @@ class FavoritesViewModel(private val db: ActorsDataBase) : ViewModel() {
     val actorList: LiveData<List<RoomActor>> = _actorList
 
 
-
-
     fun getPostFromDataBase() {
         viewModelScope.launch {
 
             _actorList.value = db.currentActorDao().getActors()
-            // =request.getActorsTest(page = page).*/
+
         }
     }
 }

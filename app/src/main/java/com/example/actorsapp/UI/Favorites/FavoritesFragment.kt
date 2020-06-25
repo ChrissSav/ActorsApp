@@ -1,13 +1,12 @@
 package com.example.actorsapp.UI.Favorites
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesFragment : Fragment() {
 
-    private  val viewModel:FavoritesViewModel by viewModel()
+    private val viewModel: FavoritesViewModel by viewModel()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var views: View
@@ -38,13 +37,12 @@ class FavoritesFragment : Fragment() {
         views = view
         recyclerView = view.findViewById(R.id.recycler_view_FavoritesFragment)
         textView = view.findViewById(R.id.FavoritesFragment_textView_sum_of_fav)
-        //
+
 
         viewModel.actorList.observe(viewLifecycleOwner, Observer {
             actorsList = it
             textView.text = actorsList.size.toString()
 
-            Log.i("takis",actorsList.size.toString())
             createRecycleView()
         })
 
@@ -55,9 +53,9 @@ class FavoritesFragment : Fragment() {
 
 
     private fun createRecycleView() {
-        recyclerView.adapter = FavActorsAdapter(actorsList){
+        recyclerView.adapter = FavActorsAdapter(actorsList) {
             val navController = Navigation.findNavController(views)
-            val bundle = bundleOf("actorId" to it.id,"favorite" to true)
+            val bundle = bundleOf("actorId" to it.id, "favorite" to true)
 
             navController!!.navigate(R.id.action_favoritesFragment_to_detailsFragment, bundle)
 

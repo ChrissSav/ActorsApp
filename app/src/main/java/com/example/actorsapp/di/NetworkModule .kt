@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit
 
 
 val networkModule = module {
+
+
     single { provideRetrofit<Api>(get()) }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get()) }
