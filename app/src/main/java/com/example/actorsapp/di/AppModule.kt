@@ -10,9 +10,9 @@ import org.koin.dsl.module
 
 
 val clientModule = module {
-    single { provideEndpoints() }
+    single { provideEndPoints() }
 }
 
-fun provideEndpoints(): MoviesEndpoints {
+fun provideEndPoints(): MoviesEndpoints {
     return ClientAPI.createService(MoviesEndpoints::class.java)
 }

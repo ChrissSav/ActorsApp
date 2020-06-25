@@ -28,16 +28,16 @@
         app:layout_constraintStart_toStartOf="@+id/textView_name"
         app:layout_constraintTop_toBottomOf="@+id/textView_name" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/CircleImageView"
         android:layout_width="68dp"
         android:layout_height="68dp"
-
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView_popularity"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/textView_name"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
 
     <ImageView
         android:id="@+id/imageView3"

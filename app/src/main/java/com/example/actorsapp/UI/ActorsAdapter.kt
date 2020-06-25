@@ -12,6 +12,7 @@ import com.example.actorsapp.API.Models.ActorModel
 import com.example.actorsapp.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.actor_item.view.*
 
 
@@ -51,10 +52,6 @@ class ActorsAdapter(
                 }
             })
 
-//        Log.d(
-//            "bbbb",
-//            "currentItem.first : " + currentItem.first.id + " " + "currentItem.second : " + currentItem.second
-//        )
 
         if (currentItem.second)
             holder.imageViewStar.visibility = View.VISIBLE
@@ -70,7 +67,7 @@ class ActorsAdapter(
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.textView_name
         val textViewPopularity: TextView = itemView.textView_popularity
-        val imageView: ImageView = itemView.imageView
+        val imageView: CircleImageView = itemView.CircleImageView
         val imageViewStar: ImageView = itemView.imageView3
 
     }

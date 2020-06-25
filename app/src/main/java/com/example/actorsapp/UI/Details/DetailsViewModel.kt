@@ -25,7 +25,6 @@ class DetailsViewModel(private val db: ActorsDataBase,private val endpoints: Mov
 
     fun getPostFromAPiTest(id: Int) {
         viewModelScope.launch {
-            //val request = ClientAPI.createService(MoviesEndpoints::class.java)
 
             val res = endpoints.getActorByIdTest(id = id)
             if (res.isSuccessful) {

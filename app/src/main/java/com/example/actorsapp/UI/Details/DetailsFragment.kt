@@ -2,13 +2,14 @@ package com.example.actorsapp.UI.Details
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.actorsapp.API.Models.ActorDetailsModel
@@ -52,6 +53,7 @@ class DetailsFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         views = view
 
 
@@ -121,17 +123,6 @@ class DetailsFragment() : Fragment() {
         detailsViewModel.getPostFromAPiTest(actorId)
     }
 
-    /*private suspend fun registerActor(context: View, actorDetails: ActorDetails) {
-        val repo = context.context.applicationContext as ApplicationClass
-        val actor = RoomActor(
-            actorDetails.id,
-            actorDetails.name,
-            actorDetails.profilePath,
-            actorDetails.popularity
-        )
-        Log.i("takis", repo.db.currentActorDao().insertOrUpdateActor(actor).toString())
-        val navController = Navigation.findNavController(views)
-        navController!!.navigate(R.id.action_detailsFragment_to_actorsFragment)
-    }*/
+
 
 }
