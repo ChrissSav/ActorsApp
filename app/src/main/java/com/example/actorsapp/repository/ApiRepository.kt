@@ -5,7 +5,7 @@ import com.example.actorsapp.API.Models.ActorDetailsModel
 import com.example.actorsapp.API.Models.ActorModel
 
 interface ApiRepository {
-    suspend fun getActors(page: Int): ArrayList<ActorModel>
+    suspend fun getActors(page: Int): List<ActorModel>
     suspend fun getActorById(id: Int): ActorDetailsModel?
 }
 
@@ -13,13 +13,13 @@ interface ApiRepository {
 class ApiRepositoryImpl(
     private val middlewareApi: Api
 ) : ApiRepository {
-    override suspend fun getActors(page: Int): ArrayList<ActorModel> {
+    override suspend fun getActors(page: Int): List<ActorModel> {
 
         val res = middlewareApi.getActorsTest(page = page)
         if (res.isSuccessful) {
             return res.body()!!.results
         }
-        return ArrayList()
+        return mutableListOf()
 
     }
 

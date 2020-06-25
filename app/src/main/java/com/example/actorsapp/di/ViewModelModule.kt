@@ -7,20 +7,9 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 
-val viewModelModuleFav = module {
-    viewModel {
-        FavoritesViewModel(get())
-    }
+val viewModelModule = module {
+    viewModel { FavoritesViewModel(get()) }
+    viewModel { ActorsViewModel(get(), get()) }
+    viewModel { DetailsViewModel(get(), get()) }
 }
 
-val viewModelModuleActor = module {
-    viewModel {
-        ActorsViewModel(get(), get())
-    }
-}
-
-val viewModelModuleDetails = module {
-    viewModel {
-        DetailsViewModel(get(), get())
-    }
-}

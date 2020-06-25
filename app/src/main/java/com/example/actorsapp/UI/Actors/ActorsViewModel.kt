@@ -10,7 +10,7 @@ import com.example.actorsapp.Data.Entities.RoomActor
 import com.example.actorsapp.repository.ApiRepository
 import kotlinx.coroutines.launch
 
-class ActorsViewModel(private val db: ActorsDataBase, private val endpoints: ApiRepository) :
+class ActorsViewModel(private val db: ActorsDataBase, private val repository: ApiRepository) :
     ViewModel() {
 
 
@@ -26,7 +26,7 @@ class ActorsViewModel(private val db: ActorsDataBase, private val endpoints: Api
             var finalList: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
             dataList = db.currentActorDao().getActors()
 
-            val apiList = endpoints.getActors(page = page)
+            val apiList = repository.getActors(page = page)
 
             if (apiList?.isNotEmpty()!!) {
 

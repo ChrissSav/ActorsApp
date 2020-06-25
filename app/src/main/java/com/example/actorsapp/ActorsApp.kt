@@ -15,11 +15,10 @@ class ActorsApp : Application() {
         startKoin {
             androidContext(this@ActorsApp)
             modules(
+                appModule,
                 networkModule,
                 storageModule,
-                viewModelModuleFav,
-                viewModelModuleActor,
-                viewModelModuleDetails
+                viewModelModule
             )
         }
     }
