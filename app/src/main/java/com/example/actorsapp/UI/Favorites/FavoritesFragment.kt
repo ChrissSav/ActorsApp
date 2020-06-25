@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -20,9 +21,9 @@ class FavoritesFragment : Fragment() {
 
     private  val viewModel:FavoritesViewModel by viewModel()
 
-    //private lateinit var viewModel: FavoritesViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var views: View
+    private lateinit var textView: TextView
     private var actorsList: List<RoomActor> = ArrayList()
 
     override fun onCreateView(
@@ -35,16 +36,19 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         views = view
-//        viewModel = ViewModelProviders.of(this).get(FavoritesViewModel::class.java)
         recyclerView = view.findViewById(R.id.recycler_view_FavoritesFragment)
+        textView = view.findViewById(R.id.FavoritesFragment_textView_sum_of_fav)
+        //
+
         viewModel.actorList.observe(viewLifecycleOwner, Observer {
             actorsList = it
+            textView.text = actorsList.size.toString()
+
             Log.i("takis",actorsList.size.toString())
             createRecycleView()
         })
 
-        ///val repo = view.context.applicationContext as ApplicationClass
-        //val nextAction = FavoritesFragmentDirections.nextAction()
+
 
         viewModel.getPostFromDataBase()
     }

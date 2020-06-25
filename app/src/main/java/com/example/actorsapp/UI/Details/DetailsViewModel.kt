@@ -5,18 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.actorsapp.API.ClientAPI
-import com.example.actorsapp.API.Models.ActorDetails
+import com.example.actorsapp.API.Models.ActorDetailsModel
 import com.example.actorsapp.API.MoviesEndpoints
 import com.example.actorsapp.Data.ActorsDataBase
-import com.example.actorsapp.Data.DAO.ActorDAO
 import com.example.actorsapp.Data.Entities.RoomActor
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(private val db: ActorsDataBase,private val endpoints: MoviesEndpoints) : ViewModel() {
 
-    private val _actor = MutableLiveData<ActorDetails>()
-    val actor: LiveData<ActorDetails> = _actor
+    private val _actor = MutableLiveData<ActorDetailsModel>()
+    val actor: LiveData<ActorDetailsModel> = _actor
 
     private val _flag = MutableLiveData<Boolean>()
     val flag: LiveData<Boolean> = _flag
@@ -39,7 +37,7 @@ class DetailsViewModel(private val db: ActorsDataBase,private val endpoints: Mov
         }
     }
 
-    fun deleteActorFromFav(actor: ActorDetails) {
+    fun deleteActorFromFav(actor: ActorDetailsModel) {
         viewModelScope.launch {
             db.currentActorDao().deleteActor(
                 RoomActor(
@@ -52,7 +50,7 @@ class DetailsViewModel(private val db: ActorsDataBase,private val endpoints: Mov
         }
     }
 
-    fun registerActorToFav(actor: ActorDetails) {
+    fun registerActorToFav(actor: ActorDetailsModel) {
         viewModelScope.launch {
             db.currentActorDao().insertOrUpdateActor(
                 RoomActor(

@@ -2,7 +2,7 @@ package com.example.actorsapp.API.Models
 
 import com.google.gson.annotations.SerializedName
 
-data class ActorDetails (
+data class ActorDetailsModel (
     val id:Int,
     val name:String,
     @SerializedName("profile_path")

@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
-import com.example.actorsapp.API.Models.ActorDetails
+import com.example.actorsapp.API.Models.ActorDetailsModel
 import com.example.actorsapp.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -25,7 +25,7 @@ class DetailsFragment() : Fragment() {
 
     private val detailsViewModel: DetailsViewModel by viewModel()
     private lateinit var buttonAddToFavorites: ImageButton
-    private lateinit var actorDetails: ActorDetails
+    private lateinit var actorDetails: ActorDetailsModel
     private lateinit var views: View
 
     private var actorId: Int = 10
