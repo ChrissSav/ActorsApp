@@ -41,7 +41,7 @@ class FavActorsAdapter(
 
         Picasso.with(context)
             .load("https://image.tmdb.org/t/p/w500" + currentItem.profilePath)
-            .into(holder.imageView, object : Callback {
+            .into(holder.CircleImageView, object : Callback {
                 override fun onSuccess() {
                     Log.d("TAG", "success")
                 }
@@ -52,7 +52,7 @@ class FavActorsAdapter(
             })
 
 
-        holder.imageView.setOnClickListener { clickListener(currentItem) }
+        holder.CircleImageView.setOnClickListener { clickListener(currentItem) }
 
 
     }
@@ -63,6 +63,6 @@ class FavActorsAdapter(
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.textView_name
         val textViewPopularity: TextView = itemView.textView_popularity
-        val imageView: ImageView = itemView.imageView
+        val CircleImageView: ImageView = itemView.CircleImageView
     }
 }

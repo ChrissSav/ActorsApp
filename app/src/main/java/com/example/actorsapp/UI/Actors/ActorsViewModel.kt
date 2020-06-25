@@ -5,12 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.actorsapp.API.Models.ActorModel
-import com.example.actorsapp.API.MoviesEndpoints
 import com.example.actorsapp.Data.ActorsDataBase
 import com.example.actorsapp.Data.Entities.RoomActor
+import com.example.actorsapp.repository.ApiRepository
 import kotlinx.coroutines.launch
 
-class ActorsViewModel (private val db: ActorsDataBase, private val endpoints: MoviesEndpoints): ViewModel() {
+class ActorsViewModel(private val db: ActorsDataBase, private val endpoints: ApiRepository) :
+    ViewModel() {
 
 
     private val _actorsList = MutableLiveData<ArrayList<Pair<ActorModel, Boolean>>>()
@@ -20,40 +21,28 @@ class ActorsViewModel (private val db: ActorsDataBase, private val endpoints: Mo
 
 
     fun getActorsFromApi(page: Int) {
-       // Log.i("estila", "page: $page")
         viewModelScope.launch {
 
-            var final: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
-
-
+            var finalList: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
             dataList = db.currentActorDao().getActors()
 
-           // val request = ClientAPI.createService(MoviesEndpoints::class.java)
+            val apiList = endpoints.getActors(page = page)
 
-            val res = endpoints.getActorsTest(page = page)
-            if (res.isSuccessful) {
+            if (apiList?.isNotEmpty()!!) {
 
-                val apiList = res.body()?.results
+                for (items in apiList!!) {
 
-                if (apiList?.isNotEmpty()!!) {
-
-                    for (items in apiList!!) {
-
-                        if (test(items))
-                            final.add(Pair(items, true))
-                        else
-                            final.add(Pair(items, false))
-                    }
-                    _actorsList.value = final
-
+                    if (checkActor(items))
+                        finalList.add(Pair(items, true))
+                    else
+                        finalList.add(Pair(items, false))
                 }
-                // _actorsList.value = res.body()?.results
-
+                _actorsList.value = finalList
             }
         }
     }
 
-    private fun test(actor: ActorModel): Boolean {
+    private fun checkActor(actor: ActorModel): Boolean {
         for (item in dataList) {
             if (item.id == actor.id)
                 return true
