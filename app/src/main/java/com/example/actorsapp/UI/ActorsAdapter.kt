@@ -40,23 +40,15 @@ class ActorsAdapter(
         holder.textViewName.text = currentItem.first.name
         holder.textViewPopularity.text = currentItem.first.popularity.toString()
 
-        Picasso.with(context)
+        Picasso.with(this.context)
             .load("https://image.tmdb.org/t/p/w500" + currentItem.first.profilePath)
-            .into(holder.imageView, object : Callback {
-                override fun onSuccess() {
-                    Log.d("TAG", "success")
-                }
-
-                override fun onError() {
-                    Log.d("TAG", "error")
-                }
-            })
+            .into(holder.circleImageView)
 
 
         if (currentItem.second)
             holder.imageViewStar.visibility = View.VISIBLE
 
-        holder.imageView.setOnClickListener { clickListener(currentItem.first) }
+        holder.circleImageView.setOnClickListener { clickListener(currentItem.first) }
 
 
     }
@@ -67,7 +59,7 @@ class ActorsAdapter(
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.textView_name
         val textViewPopularity: TextView = itemView.textView_popularity
-        val imageView: CircleImageView = itemView.CircleImageView
+        val circleImageView: CircleImageView = itemView.CircleImageView
         val imageViewStar: ImageView = itemView.imageView3
 
     }

@@ -27,7 +27,6 @@ class ActorsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var exampleListTests: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
 
-    private var page: Int = 1
     private lateinit var progressBar: ProgressBar
     private lateinit var buttonFav: Button
 
@@ -66,7 +65,7 @@ class ActorsFragment : Fragment() {
 
         if (exampleListTests.size < 1){
            // Log.i("estila","1")
-            actorsViewModel.getActorsFromApi(page)
+            actorsViewModel.getActorsFromApi()
         }
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -76,10 +75,9 @@ class ActorsFragment : Fragment() {
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
 
                     progressBar.visibility = View.VISIBLE
-                    page++
                     Log.i("estila","2")
 
-                    actorsViewModel.getActorsFromApi(page)
+                    actorsViewModel.getActorsFromApi()
 
                 }
             }

@@ -14,23 +14,26 @@ class ActorsViewModel(private val db: ActorsDataBase, private val endpoints: Api
     ViewModel() {
 
 
+    private var page : Int = 0
+
     private val _actorsList = MutableLiveData<ArrayList<Pair<ActorModel, Boolean>>>()
     private lateinit var dataList: List<RoomActor>
 
     val actorsList: LiveData<ArrayList<Pair<ActorModel, Boolean>>> = _actorsList
 
 
-    fun getActorsFromApi(page: Int) {
+    fun getActorsFromApi() {
         viewModelScope.launch {
 
             var finalList: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
             dataList = db.currentActorDao().getActors()
 
+            page ++
             val apiList = endpoints.getActors(page = page)
 
-            if (apiList?.isNotEmpty()!!) {
+            if (apiList.isNotEmpty()) {
 
-                for (items in apiList!!) {
+                for (items in apiList) {
 
                     if (checkActor(items))
                         finalList.add(Pair(items, true))
