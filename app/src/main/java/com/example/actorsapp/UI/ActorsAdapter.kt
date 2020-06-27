@@ -59,7 +59,7 @@ class ActorsAdapter(
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.textView_name
         val textViewPopularity: TextView = itemView.textView_popularity
-        val circleImageView: CircleImageView = itemView.CircleImageView
+        val circleImageView: ImageView = itemView.profile_image
         val imageViewStar: ImageView = itemView.imageView3
 
     }

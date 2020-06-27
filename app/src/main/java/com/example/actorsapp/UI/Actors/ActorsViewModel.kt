@@ -10,16 +10,20 @@ import com.example.actorsapp.Data.Entities.RoomActor
 import com.example.actorsapp.repository.ApiRepository
 import kotlinx.coroutines.launch
 
-class ActorsViewModel(private val db: ActorsDataBase, private val endpoints: ApiRepository) :
+class ActorsViewModel
+    (
+    private val db: ActorsDataBase,
+    private val endpoints: ApiRepository
+) :
     ViewModel() {
 
 
-    private var page : Int = 0
+    private var page: Int = 0
 
     private val _actorsList = MutableLiveData<ArrayList<Pair<ActorModel, Boolean>>>()
-    private lateinit var dataList: List<RoomActor>
-
     val actorsList: LiveData<ArrayList<Pair<ActorModel, Boolean>>> = _actorsList
+
+    private lateinit var dataList: List<RoomActor>
 
 
     fun getActorsFromApi() {
@@ -28,7 +32,7 @@ class ActorsViewModel(private val db: ActorsDataBase, private val endpoints: Api
             var finalList: ArrayList<Pair<ActorModel, Boolean>> = ArrayList()
             dataList = db.currentActorDao().getActors()
 
-            page ++
+            page++
             val apiList = endpoints.getActors(page = page)
 
             if (apiList.isNotEmpty()) {
